@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "todoexpire"
+version = "0.1.0"
+description = "Scan TODO comments and flag outlived TTL items."
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.scripts]
+todoexpire = "todoexpire.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["todoexpire*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
