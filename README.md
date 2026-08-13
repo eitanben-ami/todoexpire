@@ -50,20 +50,4 @@ todoexpire audit package/ --skip-test
 - `ttl:2w` — weeks
 - `ttl:2026-08-01` — fixed calendar date
 
-## Project structure
-
-```
-todoexpire/
-  pyproject.toml
-  todoexpire/
-    __init__.py
-    parser.py
-    expiry.py
-    reporter.py
-    cli.py
-  README.md
-```
-
-## Tags / keywords
-
-cli, todo, ttl, audit, python
+Source: https://github.com/eitanben-ami/todoexpire
