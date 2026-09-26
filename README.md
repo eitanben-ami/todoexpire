@@ -40,7 +40,7 @@ python -m pip install -e .
 todoexpire audit ./src --reference "2026-08-01"
 todoexpire audit ./src --reference now
 todoexpire audit app.py tests/ --json
-todoexpire audit package/ --skip-test
+todoexpire audit package/ --skip-dirs tests,build
 ```
 
 ## Supported TTL formats

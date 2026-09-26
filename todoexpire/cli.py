@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import argparse
-import sys
-from typing import List, Optional, Sequence
+from typing import Optional, Sequence
 
 from todoexpire.parser import parse_strings
 from todoexpire.reporter import render_json, render_text
@@ -46,6 +45,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     items = parse_strings(args.paths)
     from todoexpire.expiry import evaluate
+
     results = evaluate(items, reference=args.reference, warning_days=args.warning_days)
 
     if args.json:

@@ -7,7 +7,6 @@ __pycache__/
 .env
 .env.local
 .env.*.local
-.env.example
 dist/
 build/
 .coverage
@@ -20,4 +19,3 @@ out/
 .DS_Store
 AGENTS.md
 CLAUDE.md
-node_modules/

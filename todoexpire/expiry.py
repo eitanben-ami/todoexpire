@@ -27,7 +27,8 @@ class ExpiryResult:
 def _parse_ttl(ttl_text: str, reference: datetime) -> datetime:
     if _DATE_RE.match(ttl_text):
         try:
-            return datetime.strptime(ttl_text, "%Y-%m-%d").replace(tzinfo=reference.tzinfo)
+            parsed = datetime.strptime(ttl_text, "%Y-%m-%d")
+            return parsed.replace(tzinfo=reference.tzinfo)
         except ValueError as exc:
             raise ParseError(f"invalid date: {ttl_text}") from exc
 
@@ -72,7 +73,14 @@ def evaluate(
             try:
                 expires_at = _parse_ttl(item.ttl_text, ref)
             except ParseError:
-                results.append(ExpiryResult(item=item, expires_at=None, status="healthy", ttl_text=item.ttl_text))
+                results.append(
+                    ExpiryResult(
+                        item=item,
+                        expires_at=None,
+                        status="healthy",
+                        ttl_text=item.ttl_text,
+                    ),
+                )
                 continue
             if expires_at < ref:
                 status = "expired"
@@ -83,5 +91,12 @@ def evaluate(
         else:
             expires_at = None
             status = "healthy"
-        results.append(ExpiryResult(item=item, expires_at=expires_at, status=status, ttl_text=item.ttl_text))
+        results.append(
+            ExpiryResult(
+                item=item,
+                expires_at=expires_at,
+                status=status,
+                ttl_text=item.ttl_text,
+            ),
+        )
     return results

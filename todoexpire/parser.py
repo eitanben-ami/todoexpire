@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, List, Optional
 
 _COMMENT_RE = re.compile(r"#\s*(?P<token>TODO|FIXME)\b", flags=re.IGNORECASE)
+
+_ALLOWED_SUFFIXES = {".py", ".md", ".txt", ".toml", ".yaml", ".yml", ".sh"}
 
 
 @dataclass(frozen=True)
@@ -38,7 +40,7 @@ def parse_strings(paths: Iterable[str | Path]) -> List[TodoItem]:
         for path in candidates:
             if not path.is_file():
                 continue
-            if path.suffix.lower() not in {".py", ".md", ".txt", ".toml", ".yaml", ".yml", ".sh"}:
+            if path.suffix.lower() not in _ALLOWED_SUFFIXES:
                 continue
             for line_number, line, _ in _iter_lines(path):
                 match = _COMMENT_RE.search(line)
@@ -57,7 +59,7 @@ def parse_strings(paths: Iterable[str | Path]) -> List[TodoItem]:
                         raw=line.strip(),
                         token=token,
                         ttl_text=ttl_text,
-                    )
+                    ),
                 )
     return items
 
