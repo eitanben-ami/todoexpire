@@ -27,6 +27,12 @@ classifiers = [
 [project.urls]
 Repository = "https://github.com/eitanben-ami/todoexpire"
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+]
+
 [project.scripts]
 todoexpire = "todoexpire.cli:main"
 
