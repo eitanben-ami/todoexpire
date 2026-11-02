@@ -32,6 +32,10 @@ dev = [
     "pytest>=8",
     "ruff>=0.5",
 ]
+test = [
+    "pytest>=8",
+    "ruff>=0.5",
+]
 
 [project.scripts]
 todoexpire = "todoexpire.cli:main"
